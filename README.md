@@ -8,7 +8,7 @@
 
 🌱 I’m currently learning more about knowledge base discovery and hoping to merge it with my current skill set.
 
-- I love exploring tools and mathematical concepts with languages like R and Julia!
+- I love exploring tools and mathematical concepts with languages like R and Julia! I try to update my repositories with projects that I've pursued and I'm really hoping that I can start adding some work I've done with Julia. It's an amazing language, try it out!
 
 💞️ I’m looking to collaborate on VQA and speech synthesis.
 
