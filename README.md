@@ -22,3 +22,7 @@ I hope you have a lovely day or evening wherever you are and happy learning!
 Zappandy/Zappandy is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 You can click the Preview link to take a look at your changes.
 --->
+
+# Publications
+
+- [garNER at SemEval - 2023: Simplified Knowledge Augmentation for Multilingual Complex Named Entity Recognition](https://multiconer.github.io/results)
