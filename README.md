@@ -13,4 +13,4 @@ You can click the Preview link to take a look at your changes.
 
 # Publications
 
-- [garNER at SemEval - 2023: Simplified Knowledge Augmentation for Multilingual Complex Named Entity Recognition](https://multiconer.github.io/results)
+- Md Zobaer Hossain, Averie Ho Zoen So, Silviya Silwal, H. Andres Gonzalez Gongora, Ahnaf Mozib Samin, Jahedul Alam Junaed, Aritra Mazumder, Sourav Saha, and Sabiha Tahsin Soha. 2023. [garNER at SemEval-2023: Simplified Knowledge Augmentation for Multilingual Complex Named Entity Recognition.](https://aclanthology.org/2023.semeval-1.114/) In Proceedings of the The 17th International Workshop on Semantic Evaluation (SemEval-2023), pages 823–835, Toronto, Canada. Association for Computational Linguistics.
