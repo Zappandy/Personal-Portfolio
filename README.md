@@ -1,8 +1,7 @@
-👋 Hello, I’m Andres an NLP and ML Engineer currently working at the Barcelona Supercomputing Center on climate models and NLP for climate.
+👋 Hello, I’m Andres, an NLP and ML Engineer currently working at the Barcelona Supercomputing Center on climate models and NLP for climate. 
 
-- I love solving challengues whenever I can, especially multimodal ones (i.e. image to text and speech synthesis). I have experience as a data scientist and I'm a hobby musician!
 
-📫 You can reach me out on [linkedin](https://www.linkedin.com/in/andres-gonzalez-gongora-4b428613b/).
+📫 If you ever want to collab, you can reach me out on [linkedin](https://www.linkedin.com/in/andres-gonzalez-gongora-4b428613b/).
 
 <!---
 Zappandy/Zappandy is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
