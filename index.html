@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Andres Gonzalez — Scientific ML Engineer and NLP Researcher. Transformers, distributed training, and scientific AI."/>
-  <title>Andres Gonzalez — ML Engineer & Researcher</title>
+  <meta name="description" content="Andres Gonzalez, Scientific ML Engineer and NLP Researcher. Transformers, distributed training, and scientific AI."/>
+  <title>Andres Gonzalez | ML Engineer &amp; Researcher</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -38,14 +38,13 @@
           <h1 class="hero-name">Andres Gonzalez</h1>
           <p class="hero-title">NLP &amp; Distributed Systems Researcher</p>
           <p class="hero-tagline">
-            I build ML systems at the frontier of research and production — from pretraining transformers on European supercomputers to shipping multi-agent pipelines for real-world products.
+            I build ML systems that scale, from training transformers on European supercomputers to publishing NLP research at ACL and EGU.
           </p>
           <div class="interest-tags">
             <span class="interest">Transformer Architectures</span>
             <span class="interest">Distributed Training</span>
             <span class="interest">Scientific AI</span>
             <span class="interest">NLP</span>
-            <span class="interest">Multi-Agent Systems</span>
             <span class="interest">Low-Resource Languages</span>
           </div>
           <div class="hero-cta">
@@ -62,7 +61,7 @@
               </svg>
               Email
             </a>
-            <a href="#linkedin" class="btn btn-ghost">
+            <a href="https://www.linkedin.com/in/andres-gonzalez-gongora-4b428613b/" class="btn btn-ghost">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
                 <rect x="2" y="9" width="4" height="12"/>
@@ -73,31 +72,53 @@
           </div>
         </div>
 
-        <!-- Right: glass code card -->
+        <!-- Right: swappable glass code card -->
         <div class="hero-code" aria-hidden="true">
           <div class="code-header">
             <span class="code-dot"></span>
             <span class="code-dot"></span>
             <span class="code-dot"></span>
-            <span class="code-filename">train_climate.py</span>
+            <span class="code-filename" id="code-fname">train_climate.py</span>
+            <div class="code-switcher">
+              <button class="code-tab active" data-snippet="fsdp">FSDP</button>
+              <button class="code-tab" data-snippet="hf">HuggingFace</button>
+            </div>
           </div>
-          <div class="code-body"><span class="c-comment"># MareNostrum5 · 4 nodes · 32 GPUs</span>
+
+          <!-- Snippet 1: FSDP distributed training -->
+          <div class="code-body code-snippet" id="snippet-fsdp"><span class="c-comment"># MareNostrum5 · 4 nodes · 32 GPUs</span>
 <span class="c-kw">from</span> <span class="c-base">torch.distributed.fsdp</span> <span class="c-kw">import</span> <span class="c-fn">FullyShardedDataParallel</span>
 
 <span class="c-base">model</span> = <span class="c-fn">LLaMA</span>(<span class="c-str">"7B"</span>)
 <span class="c-base">trainer</span> = <span class="c-fn">FullyShardedDataParallel</span>(
     <span class="c-base">model</span>,
-    <span class="c-base">sharding_strategy</span>=<span class="c-str">FULL_SHARD</span>
+    <span class="c-base">sharding_strategy</span>=<span class="c-str">FULL_SHARD</span>,
 )
 
-<span class="c-comment"># Climate data pipeline</span>
 <span class="c-base">pipeline</span> = <span class="c-fn">ClimateDataPipeline</span>(
     <span class="c-base">backend</span>=<span class="c-str">"dask+zarr"</span>,
-    <span class="c-base">workers</span>=<span class="c-num">128</span>
+    <span class="c-base">workers</span>=<span class="c-num">128</span>,
 )
 <span class="c-base">pipeline</span>.<span class="c-fn">fit</span>(<span class="c-base">climate_dataset</span>)
 
 <span class="c-metric"># 3 hrs → 10 min  ✓  (98% reduction)</span></div>
+
+          <!-- Snippet 2: HuggingFace NLP fine-tuning -->
+          <div class="code-body code-snippet" id="snippet-hf" style="display:none; opacity:0"><span class="c-comment"># SemEval-2024 · ACL 2024</span>
+<span class="c-kw">from</span> <span class="c-base">transformers</span> <span class="c-kw">import</span> <span class="c-fn">T5ForConditionalGeneration</span>
+<span class="c-kw">from</span> <span class="c-base">peft</span> <span class="c-kw">import</span> <span class="c-fn">LoraConfig</span>, <span class="c-fn">get_peft_model</span>
+
+<span class="c-base">base</span> = <span class="c-fn">T5ForConditionalGeneration</span>.<span class="c-fn">from_pretrained</span>(
+    <span class="c-str">"google/flan-t5-large"</span>
+)
+<span class="c-base">cfg</span> = <span class="c-fn">LoraConfig</span>(<span class="c-base">r</span>=<span class="c-num">16</span>, <span class="c-base">lora_alpha</span>=<span class="c-num">32</span>,
+                 <span class="c-base">target_modules</span>=[<span class="c-str">"q"</span>, <span class="c-str">"v"</span>])
+<span class="c-base">model</span> = <span class="c-fn">get_peft_model</span>(<span class="c-base">base</span>, <span class="c-base">cfg</span>)
+
+<span class="c-base">trainer</span> = <span class="c-fn">Seq2SeqTrainer</span>(<span class="c-base">model</span>, <span class="c-base">args</span>, <span class="c-base">train</span>)
+<span class="c-base">trainer</span>.<span class="c-fn">train</span>()
+
+<span class="c-metric"># LoRA: -61% params, on-par accuracy  ✓</span></div>
         </div>
 
       </div>
@@ -110,10 +131,10 @@
       <p class="section-label">About</p>
       <h2 class="section-title">Engineer. Researcher. Builder.</h2>
       <p>
-        I'm a Scientific ML Engineer with a research background in NLP and scientific AI. My work lives at the intersection of large-scale systems engineering and fundamental research — I care about building things that work at scale and understanding why they work.
+        I'm a Scientific ML Engineer with a research background in NLP and scientific AI. My work lives at the intersection of large-scale systems engineering and fundamental research. I care about building things that work at scale and understanding why they work.
       </p>
       <p>
-        I've trained and fine-tuned large language models on MareNostrum5 (one of Europe's fastest supercomputers), reduced climate data pipelines from hours to minutes, and published at ACL — top-tier NLP research. Outside of work, I build at hackathons: AI tutoring backends, low-resource language agents, and whatever problem is most interesting that weekend.
+        I've trained and fine-tuned large language models on MareNostrum5 (one of Europe's fastest supercomputers), reduced climate data pipelines from hours to minutes, and published at ACL (top-tier NLP). Outside of work, I build at hackathons: AI tutoring backends, low-resource language agents, and whatever problem is most interesting that weekend.
       </p>
       <p>
         Currently at Technosylva developing ML pipelines for fire weather forecasting on Azure and HPC infrastructure.
@@ -167,7 +188,7 @@
             <div class="pub-card">
               <span class="pub-venue venue-acl">ACL 2024</span>
               <div class="pub-content">
-                <a class="pub-title" href="https://aclanthology.org/" target="_blank" rel="noopener">
+                <a class="pub-title" href="https://aclanthology.org/2024.semeval-1.183/" target="_blank" rel="noopener">
                   NumDecoders at SemEval-2024 Task 7: FlanT5 and GPT Enhanced with Chain-of-Thought for Numerical Reasoning
                 </a>
                 <p class="pub-summary">
@@ -179,7 +200,7 @@
             <div class="pub-card">
               <span class="pub-venue venue-acl">ACL 2023</span>
               <div class="pub-content">
-                <a class="pub-title" href="https://aclanthology.org/" target="_blank" rel="noopener">
+                <a class="pub-title" href="https://aclanthology.org/2023.semeval-1.114/" target="_blank" rel="noopener">
                   garNER at SemEval-2023: Simplified Knowledge Augmentation for Multilingual Complex NER
                 </a>
                 <p class="pub-summary">
@@ -259,7 +280,7 @@
             <div class="exp-role">Research ML Engineer II (Fellow)</div>
             <div class="exp-location">Barcelona, Spain</div>
             <ul class="exp-bullets">
-              <li>Developed a graph-based transformer with a modular, Pydantic-validated pipeline for temporal prediction — reproducible DAG-structured workflows and systematic experimentation.</li>
+              <li>Developed a graph-based transformer with a modular, Pydantic-validated pipeline for temporal prediction, emphasising reproducible DAG-structured workflows and systematic experimentation.</li>
               <li>Architected terabyte-scale climate data engineering pipeline (Dask, Zarr, OpenMPI) as technical lead, reducing I/O processing time from <strong>3 hours to 10 minutes</strong>.</li>
               <li>Optimized LLaMA-7B fine-tuning using FSDP across a 4-node multi-GPU cluster; profiled with Nvidia Nsight and PyTorch Profiler to resolve inter-node communication bottlenecks.</li>
               <li>Deployed and benchmarked state-of-the-art weather AI models (GraphCast, PanguWeather, AIFS, NeuralGCM) on MareNostrum5; cut evaluation time from <strong>5 hours to 7 minutes</strong> (98% reduction) via Zarr store templates and Slurm array parallelization.</li>
@@ -268,13 +289,13 @@
 
           <div class="exp-card">
             <div class="exp-header">
-              <span class="exp-company">Orange S.A. — Orange Innovation Labs</span>
+              <span class="exp-company">Orange Innovation Labs (Orange S.A.)</span>
               <span class="exp-dates">Mar 2023 – Nov 2023</span>
             </div>
             <div class="exp-role">R&amp;D ML &amp; NLP Engineer</div>
             <div class="exp-location">Lannion, France</div>
             <ul class="exp-bullets">
-              <li>Built NLU/NLG pipeline for a virtual assistant — encoder-decoder transformers for dialogue state tracking, intent recognition, and QA in customer service applications.</li>
+              <li>Built NLU/NLG pipeline for a virtual assistant using encoder-decoder transformers for dialogue state tracking, intent recognition, and QA in customer service applications.</li>
               <li>Researched graph-enhanced T5 architectures, integrating RGCN and GAT layers via structural adapters to capture conversational context through dialogue graphs.</li>
               <li>Benchmarked LoRA vs. full fine-tuning for T5-based dialogue systems using CodeCarbon API to quantify energy, cost, and carbon footprint trade-offs.</li>
             </ul>
@@ -376,7 +397,7 @@
         <p class="footer-copy">© 2026 Andres Gonzalez</p>
         <div class="footer-links">
           <a href="https://github.com/Zappandy" target="_blank" rel="noopener">GitHub</a>
-          <a href="#linkedin">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/andres-gonzalez-gongora-4b428613b/">LinkedIn</a>
           <a href="mailto:nanoandres24@hotmail.com">Email</a>
           <a href="learning/index.html">Learning Log</a>
         </div>
@@ -385,12 +406,13 @@
   </footer>
 
   <script>
+    // Sticky nav shadow
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 10);
     }, { passive: true });
 
-    // Tab switching
+    // Section tab switching
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const target = btn.dataset.tab;
@@ -401,7 +423,7 @@
       });
     });
 
-    // Nav links that deep-link to a specific tab
+    // Nav deep-links into a specific tab
     document.querySelectorAll('[data-tab-target]').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
@@ -409,6 +431,35 @@
         const btn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
         if (btn) btn.click();
         document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Code card snippet switcher
+    const filenames = { fsdp: 'train_climate.py', hf: 'finetune_t5.py' };
+    document.querySelectorAll('.code-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('active')) return;
+        const target = btn.dataset.snippet;
+        const current = document.querySelector('.code-snippet:not([style*="display: none"]):not([style*="display:none"])');
+
+        // Fade out current
+        if (current) { current.style.opacity = '0'; }
+
+        document.querySelectorAll('.code-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('code-fname').textContent = filenames[target];
+
+        setTimeout(() => {
+          document.querySelectorAll('.code-snippet').forEach(s => {
+            s.style.display = 'none';
+            s.style.opacity = '0';
+          });
+          const next = document.getElementById('snippet-' + target);
+          next.style.display = 'block';
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => { next.style.opacity = '1'; });
+          });
+        }, 160);
       });
     });
   </script>
