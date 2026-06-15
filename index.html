@@ -79,45 +79,44 @@
             <span class="code-dot"></span>
             <span class="code-filename" id="code-fname">train_climate.py</span>
             <div class="code-switcher">
-              <button class="code-tab active" data-snippet="fsdp">FSDP</button>
-              <button class="code-tab" data-snippet="hf">HuggingFace</button>
+              <button class="code-tab active" data-snippet="hpc">HPC</button>
+              <button class="code-tab" data-snippet="hf">LoRA</button>
             </div>
           </div>
 
-          <!-- Snippet 1: FSDP distributed training -->
-          <div class="code-body code-snippet" id="snippet-fsdp"><span class="c-comment"># MareNostrum5 · 4 nodes · 32 GPUs</span>
-<span class="c-kw">from</span> <span class="c-base">torch.distributed.fsdp</span> <span class="c-kw">import</span> <span class="c-fn">FullyShardedDataParallel</span>
+          <!-- Snippet 1: HPC distributed training -->
+          <div class="code-body code-snippet" id="snippet-hpc"><span class="c-comment"># MareNostrum5 · SLURM-managed multi-node job</span>
+<span class="c-kw">from</span> <span class="c-base">accelerate</span> <span class="c-kw">import</span> <span class="c-fn">Accelerator</span>, <span class="c-fn">FullyShardedDataParallelPlugin</span>
 
-<span class="c-base">model</span> = <span class="c-fn">LLaMA</span>(<span class="c-str">"7B"</span>)
-<span class="c-base">trainer</span> = <span class="c-fn">FullyShardedDataParallel</span>(
-    <span class="c-base">model</span>,
-    <span class="c-base">sharding_strategy</span>=<span class="c-str">FULL_SHARD</span>,
+<span class="c-base">fsdp_plugin</span> = <span class="c-fn">FullyShardedDataParallelPlugin</span>(
+    <span class="c-base">sharding_strategy</span>=<span class="c-str">"FULL_SHARD"</span>,
 )
-
-<span class="c-base">pipeline</span> = <span class="c-fn">ClimateDataPipeline</span>(
-    <span class="c-base">backend</span>=<span class="c-str">"dask+zarr"</span>,
-    <span class="c-base">workers</span>=<span class="c-num">128</span>,
+<span class="c-base">accelerator</span> = <span class="c-fn">Accelerator</span>(
+    <span class="c-base">mixed_precision</span>=<span class="c-str">"bf16"</span>, <span class="c-base">fsdp_plugin</span>=<span class="c-base">fsdp_plugin</span>
 )
-<span class="c-base">pipeline</span>.<span class="c-fn">fit</span>(<span class="c-base">climate_dataset</span>)
+<span class="c-base">model</span>, <span class="c-base">optimizer</span>, <span class="c-base">train_dl</span> = <span class="c-base">accelerator</span>.<span class="c-fn">prepare</span>(
+    <span class="c-base">model</span>, <span class="c-base">optimizer</span>, <span class="c-base">train_dl</span>
+)
+<span class="c-base">accelerator</span>.<span class="c-fn">backward</span>(<span class="c-base">loss</span>)
 
-<span class="c-metric"># 3 hrs → 10 min  ✓  (98% reduction)</span></div>
+<span class="c-metric"># 1 hr → 15 min  ✓  (75% reduction)</span></div>
 
           <!-- Snippet 2: HuggingFace NLP fine-tuning -->
-          <div class="code-body code-snippet" id="snippet-hf" style="display:none; opacity:0"><span class="c-comment"># SemEval-2024 · ACL 2024</span>
+          <div class="code-body code-snippet" id="snippet-hf" style="display:none; opacity:0"><span class="c-comment"># Orange Innovation Labs</span>
 <span class="c-kw">from</span> <span class="c-base">transformers</span> <span class="c-kw">import</span> <span class="c-fn">T5ForConditionalGeneration</span>
 <span class="c-kw">from</span> <span class="c-base">peft</span> <span class="c-kw">import</span> <span class="c-fn">LoraConfig</span>, <span class="c-fn">get_peft_model</span>
+<span class="c-kw">from</span> <span class="c-base">codecarbon</span> <span class="c-kw">import</span> <span class="c-fn">EmissionsTracker</span>
 
-<span class="c-base">base</span> = <span class="c-fn">T5ForConditionalGeneration</span>.<span class="c-fn">from_pretrained</span>(
-    <span class="c-str">"google/flan-t5-large"</span>
-)
+<span class="c-base">model</span> = <span class="c-fn">T5ForConditionalGeneration</span>.<span class="c-fn">from_pretrained</span>(<span class="c-str">"google/flan-t5-large"</span>)
 <span class="c-base">cfg</span> = <span class="c-fn">LoraConfig</span>(<span class="c-base">r</span>=<span class="c-num">16</span>, <span class="c-base">lora_alpha</span>=<span class="c-num">32</span>,
                  <span class="c-base">target_modules</span>=[<span class="c-str">"q"</span>, <span class="c-str">"v"</span>])
-<span class="c-base">model</span> = <span class="c-fn">get_peft_model</span>(<span class="c-base">base</span>, <span class="c-base">cfg</span>)
+<span class="c-base">model</span> = <span class="c-fn">get_peft_model</span>(<span class="c-base">model</span>, <span class="c-base">cfg</span>)
 
-<span class="c-base">trainer</span> = <span class="c-fn">Seq2SeqTrainer</span>(<span class="c-base">model</span>, <span class="c-base">args</span>, <span class="c-base">train</span>)
-<span class="c-base">trainer</span>.<span class="c-fn">train</span>()
+<span class="c-kw">with</span> <span class="c-fn">EmissionsTracker</span>() <span class="c-kw">as</span> <span class="c-base">tracker</span>:
+    <span class="c-base">loss</span> = <span class="c-base">model</span>(<span class="c-base">**batch</span>).<span class="c-base">loss</span>
+    <span class="c-base">loss</span>.<span class="c-fn">backward</span>()
 
-<span class="c-metric"># LoRA: -61% params, on-par accuracy  ✓</span></div>
+<span class="c-metric"># LoRA vs full fine-tune · CO₂eq via CodeCarbon  ✓</span></div>
         </div>
 
       </div>
@@ -339,8 +338,8 @@
                 Built an NLU/NLG pipeline for a production virtual assistant, and researched graph-enhanced T5 architectures (RGCN, GAT) with LoRA fine-tuning for dialogue.
               </p>
               <div class="exp-metric">
-                <span class="exp-metric-num">-61%</span>
-                <span class="exp-metric-label">trainable parameters with LoRA, on-par accuracy</span>
+                <span class="exp-metric-num">CO₂eq</span>
+                <span class="exp-metric-label">emissions tracked via CodeCarbon comparing LoRA vs full fine-tune</span>
               </div>
               <div class="exp-chips">
                 <span class="exp-chip">Transformer Encoder-Decoder</span>
@@ -430,7 +429,7 @@
     });
 
     // Code card snippet switcher
-    const filenames = { fsdp: 'train_climate.py', hf: 'finetune_t5.py' };
+    const filenames = { hpc: 'train_climate.py', hf: 'finetune_nlg.py' };
     document.querySelectorAll('.code-tab').forEach(btn => {
       btn.addEventListener('click', () => {
         if (btn.classList.contains('active')) return;
