@@ -1,5 +1,5 @@
 [build]
-  command = "python build.py"
+  command = "pip install uv && uv run build.py"
   publish = "."
 
 [build.environment]
