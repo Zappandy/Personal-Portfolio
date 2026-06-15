@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
-"""Build Markdown posts into styled HTML pages and refresh the Writing indexes.
+"""Build Markdown posts into styled HTML pages and refresh Writing indexes.
+Also processes project notes and injects them into project detail pages.
 
 Usage:
     uv run build.py
 
-Reads:   content/musings/*.md  and  content/learning/*.md
-Writes:  musings/<slug>.html   and  learning/<slug>.html
-         + refreshes the post listings in musings/index.html & learning/index.html
-           (between the <!-- POSTS:START --> / <!-- POSTS:END --> markers)
+Reads:
+  - content/musings/*.md  and  content/learning/*.md  → full article pages
+  - content/projects/<project>/notes.md  → injects into projects/<project>/index.html
 
-Each Markdown file starts with simple frontmatter:
+Writes:
+  - musings/<slug>.html   and  learning/<slug>.html
+  - refreshes post listings in musings/index.html & learning/index.html
+  - injects project notes into project detail pages
+
+Writing posts start with frontmatter:
 
     ---
     title: My Post Title
@@ -18,6 +23,14 @@ Each Markdown file starts with simple frontmatter:
     ---
 
     # Body in Markdown...
+
+Project notes are free-form Markdown with sections marked by ## headings:
+
+    ## What I built
+    Your content here...
+
+    ## What I learned
+    Your content here...
 """
 from __future__ import annotations
 
@@ -259,6 +272,74 @@ def refresh_writing_hub(counts: dict[str, int]) -> None:
     print("writing hub: badges updated")
 
 
+def process_project_notes(project: str, notes_md: str) -> dict[str, str]:
+    """Parse project notes by ## heading (e.g. '## What I built') and render to HTML."""
+    sections = {}
+    lines = notes_md.strip().split("\n")
+    current_section = None
+    current_content = []
+
+    for line in lines:
+        if line.startswith("## "):
+            # New section heading
+            if current_section:
+                # Save previous section
+                body_html = markdown.markdown(
+                    "\n".join(current_content).strip(),
+                    extensions=["fenced_code", "tables", "sane_lists", "smarty"],
+                    output_format="html5",
+                )
+                sections[current_section] = body_html
+            # Extract the section name and normalize it
+            heading = line[3:].strip()  # Remove "## "
+            current_section = heading.lower().replace(" ", "-")
+            current_content = []
+        elif current_section is not None:
+            current_content.append(line)
+
+    # Save the last section
+    if current_section:
+        body_html = markdown.markdown(
+            "\n".join(current_content).strip(),
+            extensions=["fenced_code", "tables", "sane_lists", "smarty"],
+            output_format="html5",
+        )
+        sections[current_section] = body_html
+
+    return sections
+
+
+def inject_project_notes(project: str, sections: dict[str, str]) -> None:
+    """Inject rendered project notes into the project detail page."""
+    detail_page = ROOT / "projects" / project / "index.html"
+    if not detail_page.exists():
+        print(f"  (project detail page not found: {detail_page})")
+        return
+
+    text = detail_page.read_text(encoding="utf-8")
+    # Map section names to the markers in the HTML
+    marker_map = {
+        "what-i-built": "BUILT",
+        "what-i-learned": "LEARNED",
+    }
+
+    for section_name, html_content in sections.items():
+        marker_key = marker_map.get(section_name)
+        if not marker_key:
+            continue
+        start = f"<!-- NOTES:{marker_key}:START -->"
+        end = f"<!-- NOTES:{marker_key}:END -->"
+        if start not in text or end not in text:
+            print(f"  (project {project}: no {start} marker)")
+            continue
+        before, _, rest = text.partition(start)
+        _, _, after = rest.partition(end)
+        text = f"{before}{start}\n          {html_content}\n          {end}{after}"
+
+    detail_page.write_text(text, encoding="utf-8")
+    print(f"  · projects/{project}: notes injected")
+
+
 def main() -> None:
     total = 0
     counts: dict[str, int] = {}
@@ -272,6 +353,20 @@ def main() -> None:
         refresh_index(section, posts)
         print(f"{section}: {len(posts)} post(s) → refreshed {section}/index.html")
     refresh_writing_hub(counts)
+
+    # Process project notes
+    projects_dir = CONTENT / "projects"
+    if projects_dir.exists():
+        for project_dir in sorted(projects_dir.iterdir()):
+            if not project_dir.is_dir():
+                continue
+            notes_path = project_dir / "notes.md"
+            if notes_path.exists():
+                notes_text = notes_path.read_text(encoding="utf-8")
+                sections = process_project_notes(project_dir.name, notes_text)
+                inject_project_notes(project_dir.name, sections)
+                total += 1
+
     print(f"Done. {total} page(s) built.")
 
 
