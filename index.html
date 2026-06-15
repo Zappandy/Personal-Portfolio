@@ -13,10 +13,9 @@
   <nav id="nav">
     <a href="#" class="nav-brand">Andres Gonzalez</a>
     <ul class="nav-links">
-      <li class="hide-mobile"><a href="#about">About</a></li>
-      <li class="hide-mobile"><a href="#work" data-tab-target="research">Research</a></li>
       <li class="hide-mobile"><a href="#work" data-tab-target="experience">Experience</a></li>
-      <li class="hide-mobile"><a href="#skills">Skills</a></li>
+      <li class="hide-mobile"><a href="#work" data-tab-target="research">Research</a></li>
+      <li class="hide-mobile"><a href="writing/index.html">Writing</a></li>
       <li>
         <a href="https://github.com/Zappandy" class="nav-icon" target="_blank" rel="noopener" aria-label="GitHub">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -36,9 +35,9 @@
         <div class="hero-content">
           <p class="hero-eyebrow">Scientific ML Engineer</p>
           <h1 class="hero-name">Andres Gonzalez</h1>
-          <p class="hero-title">NLP &amp; Distributed Systems Researcher</p>
+          <p class="hero-title">Distributed Training · NLP · HPC</p>
           <p class="hero-tagline">
-            I build ML systems that scale, from training transformers on European supercomputers to publishing NLP research at ACL and EGU.
+            I make large-scale ML actually run: optimizing distributed training on supercomputers and building production pipelines from prototype to deployment with scientific rigor.
           </p>
           <div class="interest-tags">
             <span class="interest">Transformer Architectures</span>
@@ -125,51 +124,20 @@
     </div>
   </section>
 
-  <!-- About (centered) -->
-  <section id="about">
-    <div class="container">
-      <p class="section-label">About</p>
-      <h2 class="section-title">Engineer. Researcher. Builder.</h2>
-      <p>
-        I'm a Scientific ML Engineer with a research background in NLP and scientific AI. My work lives at the intersection of large-scale systems engineering and fundamental research. I care about building things that work at scale and understanding why they work.
-      </p>
-      <p>
-        I've trained and fine-tuned large language models on MareNostrum5 (one of Europe's fastest supercomputers), reduced climate data pipelines from hours to minutes, and published at ACL (top-tier NLP). Outside of work, I build at hackathons: AI tutoring backends, low-resource language agents, and whatever problem is most interesting that weekend.
-      </p>
-      <p>
-        Currently at Technosylva developing ML pipelines for fire weather forecasting on Azure and HPC infrastructure.
-      </p>
-
-      <div class="stats-row">
-        <div class="stat-card">
-          <span class="stat-num">3</span>
-          <span class="stat-label">Publications<small>ACL · EGU</small></span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-num">98%</span>
-          <span class="stat-label">Pipeline speedup<small>on MareNostrum5</small></span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-num">5+</span>
-          <span class="stat-label">Years in ML<small>NLP → HPC → Scientific AI</small></span>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Main tabbed content: Research & Projects | Experience -->
   <section id="work">
     <div class="container">
       <div class="tab-bar">
-        <button class="tab-btn active" data-tab="research">Research &amp; Projects</button>
-        <button class="tab-btn" data-tab="experience">Where I've Worked</button>
+        <button class="tab-btn active" data-tab="experience">Where I've Worked</button>
+        <button class="tab-btn" data-tab="research">Research &amp; Projects</button>
       </div>
 
       <!-- Research & Projects tab -->
-      <div class="tab-pane active" id="tab-research">
+      <div class="tab-pane" id="tab-research">
 
         <div class="sub-section">
-          <p class="section-label">Publications</p>
+          <p class="section-label">Publications &amp; Workshops</p>
           <h2 class="section-title">Research</h2>
           <div class="pub-list">
 
@@ -218,6 +186,12 @@
           <div class="project-grid">
 
             <div class="project-card">
+              <div class="project-img">
+                <div class="img-placeholder">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                  <p>Agent routing flow diagram or screenshot of the teaching assistant UI</p>
+                </div>
+              </div>
               <div class="project-header">
                 <span class="project-name">AI Teaching Assistant</span>
                 <span class="project-badge">Hackathon</span>
@@ -227,13 +201,20 @@
               </p>
               <div class="project-footer">
                 <span class="project-event">Preply Hackathon · Mar 2026</span>
-                <a href="https://github.com/summerdevlin46/preply_agora_hackathon" class="project-link" target="_blank" rel="noopener">
-                  View on GitHub →
-                </a>
+                <div class="project-actions">
+                  <a href="https://github.com/summerdevlin46/preply_agora_hackathon" class="project-link" target="_blank" rel="noopener">GitHub →</a>
+                  <a href="projects/preply/index.html" class="project-link project-link-details">Details →</a>
+                </div>
               </div>
             </div>
 
             <div class="project-card">
+              <div class="project-img">
+                <div class="img-placeholder">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                  <p>Inventory agent pipeline diagram or Telugu language demo screenshot</p>
+                </div>
+              </div>
               <div class="project-header">
                 <span class="project-name">Small Inventory Agent</span>
                 <span class="project-badge">Hackathon</span>
@@ -243,9 +224,10 @@
               </p>
               <div class="project-footer">
                 <span class="project-event">HuggingFace Hackathon · Jun 2026</span>
-                <a href="https://github.com/Zappandy/Small_Inventory_Agent" class="project-link" target="_blank" rel="noopener">
-                  View on GitHub →
-                </a>
+                <div class="project-actions">
+                  <a href="https://github.com/Zappandy/Small_Inventory_Agent" class="project-link" target="_blank" rel="noopener">GitHub →</a>
+                  <a href="projects/inventory-agent/index.html" class="project-link project-link-details">Details →</a>
+                </div>
               </div>
             </div>
 
@@ -255,62 +237,130 @@
       </div>
 
       <!-- Experience tab -->
-      <div class="tab-pane" id="tab-experience">
+      <div class="tab-pane active" id="tab-experience">
         <p class="section-label">Experience</p>
         <h2 class="section-title">Where I've worked</h2>
         <div class="exp-list">
 
+          <!-- Technosylva -->
           <div class="exp-card">
-            <div class="exp-header">
-              <span class="exp-company">Technosylva</span>
-              <span class="exp-dates">May 2026 – Present</span>
+            <div class="exp-visual">
+              <div class="exp-visual-content">
+                <div class="exp-meta">
+                  <div>
+                    <span class="exp-company">Technosylva</span>
+                    <span class="exp-role">Scientific ML Engineer</span>
+                    <span class="exp-location">Barcelona, Spain (Remote)</span>
+                  </div>
+                  <span class="exp-dates">May 2026 – Present</span>
+                </div>
+                <p class="exp-narrative">
+                  Developing ML pipelines for fire weather forecasting on Azure and HPC infrastructure, applying scientific ML to predict wildfire behavior at operational scale.
+                </p>
+                <div class="exp-chips">
+                  <span class="exp-chip">Azure</span>
+                  <span class="exp-chip">Python</span>
+                  <span class="exp-chip">HPC</span>
+                  <span class="exp-chip">MLflow</span>
+                  <span class="exp-chip">CI/CD</span>
+                </div>
+              </div>
             </div>
-            <div class="exp-role">Scientific ML Engineer</div>
-            <div class="exp-location">Barcelona, Spain (Remote)</div>
-            <ul class="exp-bullets">
-              <li>Developing ML pipelines for fire weather forecasting on cloud (Azure) and HPC infrastructure.</li>
-            </ul>
           </div>
 
+          <!-- BSC -->
           <div class="exp-card">
-            <div class="exp-header">
-              <span class="exp-company">Barcelona Supercomputing Center</span>
-              <span class="exp-dates">Feb 2024 – May 2026</span>
+            <div class="exp-visual">
+              <div class="exp-visual-content">
+                <div class="exp-meta">
+                  <div>
+                    <span class="exp-company">Barcelona Supercomputing Center</span>
+                    <span class="exp-role">Research ML Engineer II (Fellow)</span>
+                    <span class="exp-location">Barcelona, Spain</span>
+                  </div>
+                  <span class="exp-dates">Feb 2024 – May 2026</span>
+                </div>
+                <p class="exp-narrative">
+                  Trained graph-based transformers and fine-tuned LLaMA-7B with FSDP on MareNostrum5, and built the climate data and benchmarking pipelines behind large-scale weather model evaluation.
+                </p>
+                <div class="exp-metric">
+                  <span class="exp-metric-num">98%</span>
+                  <span class="exp-metric-label">evaluation pipeline speedup on MareNostrum5</span>
+                </div>
+                <div class="exp-chips">
+                  <span class="exp-chip">PyTorch</span>
+                  <span class="exp-chip">FSDP</span>
+                  <span class="exp-chip">LLaMA</span>
+                  <span class="exp-chip">Dask</span>
+                  <span class="exp-chip">Zarr</span>
+                  <span class="exp-chip">Slurm</span>
+                  <span class="exp-chip">GraphCast</span>
+                  <span class="exp-chip">Nsight</span>
+                </div>
+              </div>
             </div>
-            <div class="exp-role">Research ML Engineer II (Fellow)</div>
-            <div class="exp-location">Barcelona, Spain</div>
-            <ul class="exp-bullets">
-              <li>Developed a graph-based transformer with a modular, Pydantic-validated pipeline for temporal prediction, emphasising reproducible DAG-structured workflows and systematic experimentation.</li>
-              <li>Architected terabyte-scale climate data engineering pipeline (Dask, Zarr, OpenMPI) as technical lead, reducing I/O processing time from <strong>3 hours to 10 minutes</strong>.</li>
-              <li>Optimized LLaMA-7B fine-tuning using FSDP across a 4-node multi-GPU cluster; profiled with Nvidia Nsight and PyTorch Profiler to resolve inter-node communication bottlenecks.</li>
-              <li>Deployed and benchmarked state-of-the-art weather AI models (GraphCast, PanguWeather, AIFS, NeuralGCM) on MareNostrum5; cut evaluation time from <strong>5 hours to 7 minutes</strong> (98% reduction) via Zarr store templates and Slurm array parallelization.</li>
-            </ul>
           </div>
 
+          <!-- Orange -->
           <div class="exp-card">
-            <div class="exp-header">
-              <span class="exp-company">Orange Innovation Labs (Orange S.A.)</span>
-              <span class="exp-dates">Mar 2023 – Nov 2023</span>
+            <div class="exp-visual">
+              <div class="exp-visual-content">
+                <div class="exp-meta">
+                  <div>
+                    <span class="exp-company">Orange Innovation Labs</span>
+                    <span class="exp-role">R&amp;D ML &amp; NLP Engineer</span>
+                    <span class="exp-location">Lannion, France</span>
+                  </div>
+                  <span class="exp-dates">Mar 2023 – Nov 2023</span>
+                </div>
+                <p class="exp-narrative">
+                  Built an NLU/NLG pipeline for a production virtual assistant, and researched graph-enhanced T5 architectures (RGCN, GAT) with LoRA fine-tuning for dialogue.
+                </p>
+                <div class="exp-metric">
+                  <span class="exp-metric-num">-61%</span>
+                  <span class="exp-metric-label">trainable parameters with LoRA, on-par accuracy</span>
+                </div>
+                <div class="exp-chips">
+                  <span class="exp-chip">T5</span>
+                  <span class="exp-chip">LoRA</span>
+                  <span class="exp-chip">PEFT</span>
+                  <span class="exp-chip">RGCN</span>
+                  <span class="exp-chip">GAT</span>
+                  <span class="exp-chip">CodeCarbon</span>
+                  <span class="exp-chip">HuggingFace</span>
+                </div>
+              </div>
             </div>
-            <div class="exp-role">R&amp;D ML &amp; NLP Engineer</div>
-            <div class="exp-location">Lannion, France</div>
-            <ul class="exp-bullets">
-              <li>Built NLU/NLG pipeline for a virtual assistant using encoder-decoder transformers for dialogue state tracking, intent recognition, and QA in customer service applications.</li>
-              <li>Researched graph-enhanced T5 architectures, integrating RGCN and GAT layers via structural adapters to capture conversational context through dialogue graphs.</li>
-              <li>Benchmarked LoRA vs. full fine-tuning for T5-based dialogue systems using CodeCarbon API to quantify energy, cost, and carbon footprint trade-offs.</li>
-            </ul>
           </div>
 
+          <!-- UoM -->
           <div class="exp-card">
-            <div class="exp-header">
-              <span class="exp-company">University of Malta</span>
-              <span class="exp-dates">Nov 2021 – Nov 2022</span>
+            <div class="exp-visual">
+              <div class="exp-visual-content">
+                <div class="exp-meta">
+                  <div>
+                    <span class="exp-company">University of Malta</span>
+                    <span class="exp-role">NLP Research Engineer</span>
+                    <span class="exp-location">Msida, Malta</span>
+                  </div>
+                  <span class="exp-dates">Nov 2021 – Nov 2022</span>
+                </div>
+                <p class="exp-narrative">
+                  Pretrained multilingual BERT on under-resourced languages like Maltese and Faroese, with zero-shot transfer to POS tagging.
+                </p>
+                <div class="exp-metric">
+                  <span class="exp-metric-num">2</span>
+                  <span class="exp-metric-label">under-resourced languages pretrained</span>
+                </div>
+                <div class="exp-chips">
+                  <span class="exp-chip">BERT</span>
+                  <span class="exp-chip">Masked LM</span>
+                  <span class="exp-chip">Multilingual NLP</span>
+                  <span class="exp-chip">HuggingFace</span>
+                  <span class="exp-chip">Zero-shot</span>
+                </div>
+              </div>
             </div>
-            <div class="exp-role">NLP Research Engineer</div>
-            <div class="exp-location">Msida, Malta</div>
-            <ul class="exp-bullets">
-              <li>Pretrained multilingual BERT on under-resourced languages (Maltese, Faroese) via masked language modeling, achieving strong zero-shot transfer on POS tagging without language-specific fine-tuning.</li>
-            </ul>
           </div>
 
         </div>
@@ -320,76 +370,6 @@
   </section>
 
   <!-- Skills -->
-  <section id="skills">
-    <div class="container">
-      <p class="section-label">Toolkit</p>
-      <h2 class="section-title">Skills</h2>
-      <div class="skills-grid">
-
-        <div class="skill-group">
-          <p class="skill-group-label">ML &amp; Deep Learning</p>
-          <div class="skill-tags">
-            <span class="tag">PyTorch</span>
-            <span class="tag">JAX</span>
-            <span class="tag">PyTorch Lightning</span>
-            <span class="tag">Hugging Face Transformers</span>
-            <span class="tag">vLLM</span>
-            <span class="tag">PEFT / LoRA</span>
-            <span class="tag">Scikit-learn</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <p class="skill-group-label">HPC &amp; Distributed Computing</p>
-          <div class="skill-tags">
-            <span class="tag">FSDP</span>
-            <span class="tag">DDP</span>
-            <span class="tag">Slurm</span>
-            <span class="tag">OpenMPI</span>
-            <span class="tag">Nvidia Nsight</span>
-            <span class="tag">Nvidia RAPIDS</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <p class="skill-group-label">Scientific Data</p>
-          <div class="skill-tags">
-            <span class="tag">Dask</span>
-            <span class="tag">Zarr</span>
-            <span class="tag">Xarray</span>
-            <span class="tag">NumPy</span>
-            <span class="tag">Pandas</span>
-            <span class="tag">PySpark</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <p class="skill-group-label">MLOps &amp; Deployment</p>
-          <div class="skill-tags">
-            <span class="tag">Docker</span>
-            <span class="tag">Singularity</span>
-            <span class="tag">W&amp;B</span>
-            <span class="tag">MLflow</span>
-            <span class="tag">CI/CD</span>
-            <span class="tag">Git</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <p class="skill-group-label">Languages</p>
-          <div class="skill-tags">
-            <span class="tag">Python</span>
-            <span class="tag">Rust</span>
-            <span class="tag">Bash</span>
-            <span class="tag">Julia</span>
-            <span class="tag">C</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
   <!-- Footer -->
   <footer>
     <div class="container">
@@ -399,7 +379,7 @@
           <a href="https://github.com/Zappandy" target="_blank" rel="noopener">GitHub</a>
           <a href="https://www.linkedin.com/in/andres-gonzalez-gongora-4b428613b/">LinkedIn</a>
           <a href="mailto:nanoandres24@hotmail.com">Email</a>
-          <a href="learning/index.html">Learning Log</a>
+          <a href="writing/index.html">Writing</a>
         </div>
       </div>
     </div>
@@ -463,6 +443,7 @@
       });
     });
   </script>
+
 
 </body>
 </html>

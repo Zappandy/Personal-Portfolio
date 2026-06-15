@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Writing — Andres Gonzalez</title>
+  <link rel="stylesheet" href="../style.css"/>
+  <style>
+    .writing-hub {
+      min-height: calc(100vh - 56px);
+      padding: 5rem 0 4rem;
+    }
+    .writing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .writing-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      box-shadow: var(--glass-shadow);
+      padding: 2rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+    }
+    .writing-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 18% 0%, rgba(255,255,255,0.5) 0%, transparent 52%);
+      pointer-events: none;
+      border-radius: inherit;
+    }
+    .writing-card:hover {
+      box-shadow: var(--glass-shadow-hover);
+      transform: translateY(-2px);
+    }
+    .writing-card > * { position: relative; z-index: 1; }
+    .writing-card-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    .writing-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .writing-card-desc {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--muted);
+      margin: 0;
+    }
+    .writing-card-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-pill);
+      background: rgba(41,151,255,0.1);
+      border: 1px solid rgba(41,151,255,0.25);
+      color: var(--accent-dark);
+      width: fit-content;
+      margin-top: auto;
+    }
+    .writing-card-badge.soon {
+      background: rgba(0,0,0,0.04);
+      border-color: rgba(0,0,0,0.12);
+      color: var(--muted);
+    }
+    @media (max-width: 600px) {
+      .writing-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="../index.html" class="nav-brand">Andres Gonzalez</a>
+    <ul class="nav-links">      <li class="hide-mobile"><a href="../index.html#work" data-tab-target="experience">Experience</a></li>
+
+      <li class="hide-mobile"><a href="../index.html#work" data-tab-target="research">Research</a></li>
+      <li class="hide-mobile"><a href="index.html" style="color:var(--accent-dark); font-weight:600;">Writing</a></li>
+      <li>
+        <a href="https://github.com/Zappandy" class="nav-icon" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="writing-hub" style="background: radial-gradient(ellipse at 75% 15%, rgba(99,179,237,0.2) 0%, transparent 50%), linear-gradient(135deg, #dfeeff 0%, #ead6ff 100%);">
+    <div class="container">
+      <p class="section-label">Writing</p>
+      <h1 class="section-title">Things I write about</h1>
+      <p style="color:var(--muted); font-size:0.95rem; margin-top:0.5rem; max-width:520px;">
+        Two kinds of writing: notes from building and studying things, and looser thoughts on ML, research, and whatever I find interesting.
+      </p>
+
+      <div class="writing-grid">
+
+        <a href="../learning/index.html" class="writing-card">
+          <span class="writing-card-icon">&#x1F4D0;</span>
+          <span class="writing-card-title">Learning Log</span>
+          <p class="writing-card-desc">
+            Setup notes, reading summaries, and worked examples from things I am actively learning. Practical and reference-oriented.
+          </p>
+          <span class="writing-card-badge">1 entry</span>
+        </a>
+
+        <a href="../musings/index.html" class="writing-card">
+          <span class="writing-card-icon">&#x1F4AC;</span>
+          <span class="writing-card-title">Musings</span>
+          <p class="writing-card-desc">
+            Looser essays and opinions. ML research directions I find compelling, things I noticed while building, ideas worth thinking through out loud.
+          </p>
+          <span class="writing-card-badge soon">Coming soon</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-copy">&#169; 2026 Andres Gonzalez</span>
+      <div class="footer-links">
+        <a href="https://github.com/Zappandy" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/andres-gonzalez-gongora-4b428613b/">LinkedIn</a>
+        <a href="mailto:nanoandres24@hotmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
+
+</body>
+</html>

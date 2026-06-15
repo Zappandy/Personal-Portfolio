@@ -1,41 +1,183 @@
-<!-- learning/00-setup-portfolio.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>How I Built This Portfolio Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How I Built This Portfolio Site — Andres Gonzalez</title>
+  <link rel="stylesheet" href="../../style.css"/>
   <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; background: #fdfdfd; color: #333; }
-    a { color: blue; }
-    pre { background: #f0f0f0; padding: 1em; border-radius: 6px; overflow-x: auto; }
+    .article-section {
+      min-height: calc(100vh - 56px);
+      padding: 5rem 0 4rem;
+    }
+    .article {
+      position: relative;
+      overflow: hidden;
+      background: var(--glass-bg-light);
+      backdrop-filter: var(--glass-blur-light);
+      -webkit-backdrop-filter: var(--glass-blur-light);
+      border: 1px solid var(--glass-border-light);
+      border-radius: var(--radius);
+      box-shadow: var(--glass-shadow);
+      padding: 2.5rem 2.75rem;
+      margin-top: 2rem;
+      max-width: 760px;
+    }
+    .article::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 18% 0%, rgba(255,255,255,0.5) 0%, transparent 52%);
+      pointer-events: none;
+      border-radius: inherit;
+    }
+    .article > * { position: relative; z-index: 1; }
+    .article h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 2rem 0 0.85rem;
+    }
+    .article p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .article ol, .article ul {
+      margin: 0 0 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .article li {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+    .article a {
+      color: var(--accent-dark);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,113,227,0.3);
+      transition: border-color 0.2s;
+    }
+    .article a:hover { border-bottom-color: var(--accent-dark); }
+    .article code {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      background: rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 5px;
+      padding: 0.1rem 0.4rem;
+      color: var(--text);
+    }
+    .article pre {
+      background: #0c1322;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.4rem;
+      overflow-x: auto;
+      margin: 0 0 1.25rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
+    .article pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: #c8d4e6;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+    .article-back {
+      display: inline-block;
+      margin-top: 1.75rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      text-decoration: none;
+      border: none;
+    }
+    .article-back:hover { color: var(--accent-dark); }
+    .article-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      margin-top: 0.5rem;
+    }
   </style>
 </head>
 <body>
-  <h1>How I Built This Portfolio Site</h1>
-  <p>This document tracks the key steps I took to set up this site using GitHub Pages and HTML.</p>
 
-  <h2>🔧 Step-by-Step Summary</h2>
-  <ol>
-    <li>Created a new GitHub repository named <code>portfolio-site</code>.</li>
-    <li>Added a basic <code>index.html</code> file with my portfolio content.</li>
-    <li>Pushed the code to GitHub using Git:</li>
-    <pre><code>git init
-git remote add origin https://github.com/yourusername/portfolio-site.git
+  <nav id="nav">
+    <a href="../../index.html" class="nav-brand">Andres Gonzalez</a>
+    <ul class="nav-links">
+      <li class="hide-mobile"><a href="../../index.html#work" data-tab-target="experience">Experience</a></li>
+      <li class="hide-mobile"><a href="../../index.html#work" data-tab-target="research">Research</a></li>
+      <li class="hide-mobile"><a href="../../writing/index.html" style="color:var(--accent-dark); font-weight:600;">Writing</a></li>
+      <li>
+        <a href="https://github.com/Zappandy" class="nav-icon" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="article-section" style="background: radial-gradient(ellipse at 75% 15%, rgba(99,179,237,0.2) 0%, transparent 50%), linear-gradient(135deg, #dfeeff 0%, #ead6ff 100%);">
+    <div class="container">
+      <p class="section-label"><a href="../../writing/index.html" style="color:inherit; text-decoration:none;">Writing</a> / <a href="../index.html" style="color:inherit; text-decoration:none;">Learning Log</a> / Setup</p>
+      <h1 class="section-title">How I Built This Portfolio Site</h1>
+      <p class="article-meta">Learning Log · v1</p>
+
+      <article class="article">
+        <p>This document tracks the key steps I took to set up this site using GitHub Pages and plain HTML.</p>
+
+        <h2>Step-by-step summary</h2>
+        <ol>
+          <li>Created a new GitHub repository named <code>Personal-Portfolio</code>.</li>
+          <li>Added a basic <code>index.html</code> file with my portfolio content.</li>
+          <li>Pushed the code to GitHub using Git:</li>
+        </ol>
+        <pre><code>git init
+git remote add origin https://github.com/Zappandy/Personal-Portfolio.git
 git add .
 git commit -m "Initial commit"
 git push -u origin main</code></pre>
-    <li>Enabled GitHub Pages under <strong>Settings > Pages</strong>.</li>
-    <li>Confirmed my site is live at: <a href="https://Zappandy.github.io/Personal-Portfolio">https://Zappandy.github.io/Personal-Portfolio</a></li>
-    <li>Created a <code>/learning/</code> directory to document this journey.</li>
-  </ol>
+        <ol start="4">
+          <li>Enabled GitHub Pages under <strong>Settings &gt; Pages</strong>.</li>
+          <li>Confirmed the site is live at <a href="https://Zappandy.github.io/Personal-Portfolio">Zappandy.github.io/Personal-Portfolio</a>.</li>
+          <li>Created a <code>/learning/</code> directory to document the journey.</li>
+        </ol>
 
-  <h2>🧱 Next Steps</h2>
-  <ul>
-    <li>Deploy a FastAPI backend for a real ML project</li>
-    <li>Add Streamlit or Hugging Face Space UIs</li>
-    <li>Eventually move to React and Netlify for more flexibility</li>
-  </ul>
+        <h2>Next steps</h2>
+        <ul>
+          <li>Deploy a FastAPI backend for a real ML project.</li>
+          <li>Add Streamlit or Hugging Face Space UIs.</li>
+          <li>Explore a static site generator if the writing section grows.</li>
+        </ul>
 
-  <p><a href="../index.html">← Back to Portfolio</a></p>
+        <a href="../index.html" class="article-back">← Back to Learning Log</a>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-copy">&#169; 2026 Andres Gonzalez</span>
+      <div class="footer-links">
+        <a href="https://github.com/Zappandy" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/andres-gonzalez-gongora-4b428613b/">LinkedIn</a>
+        <a href="mailto:nanoandres24@hotmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
+
 </body>
 </html>
