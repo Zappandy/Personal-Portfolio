@@ -1,0 +1,15 @@
+# Local-only working docs — never deployed to GitHub Pages.
+# These contain personal info (phone, etc.) and notes-to-self.
+RESUME_SAMPLE.md
+TARGET_ROLE.md
+HACKATHONS.md
+
+# Local-only staging area: drafts-in-progress and content you only want
+# to share selectively. Nothing in here is committed or published.
+# When a draft is ready, MOVE it out into the public tree (e.g. musings/).
+private/
+
+# uv / Python build env (uv.lock + pyproject.toml ARE committed)
+.venv/
+__pycache__/
+*.pyc

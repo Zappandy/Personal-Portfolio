@@ -71,17 +71,34 @@ Research-first, not resume-first. The site leads with research identity, publica
 
 ---
 
-## Roadmap
+## Writing workflow (Markdown → HTML)
 
-### Blog (Substack-style)
-Create a `writing/` directory with individual post pages. Each post is a standalone HTML file using the same `style.css`. The writing index (`writing/index.html`) lists posts as cards with title, date, and a 2-sentence preview — same glass card treatment as the project cards. Link it from the nav and footer.
+The **Writing** section (Musings + Learning Log) is generated from Markdown by `build.py`,
+in an isolated env managed by [uv](https://docs.astral.sh/uv/).
 
-**Suggested first posts for an ML researcher:**
+```bash
+# one-time: provision the env (downloads Python + markdown)
+uv sync
+
+# write a post: content/musings/<slug>.md  (see content/README.md for frontmatter)
+uv run build.py        # → musings/<slug>.html + refreshed index + hub badge counts
+```
+
+`build.py` writes the styled HTML pages, regenerates the index listings (between the
+`POSTS:START/END` markers), and updates the Writing-hub entry counts ("3 entries" /
+"Coming soon"). Commit the `.md` **and** the generated `.html`. Full guide: `content/README.md`.
+
+Drafts and private notes live in `private/` (gitignored — never built or deployed).
+
+**Suggested first posts:**
 - A technical explainer on FSDP vs DDP (you've run both at scale)
 - A write-up on the climate LLM paper
 - "What I learned building on MareNostrum5"
 
-No CMS needed at this scale. If it grows beyond ~10 posts, consider a static site generator (Eleventy or Hugo) that can compile markdown to the same HTML template.
+## Roadmap
+
+If Writing grows past ~30 posts and `build.py` starts feeling limiting, the natural next
+step is a static site generator (Eleventy / Hugo) using the same `style.css`.
 
 ### Learning section
 Expand `learning/index.html` into a proper log. Each entry is a short note: what you read, what you built, what surprised you. Group entries by topic (e.g. "Distributed Systems", "NLP Architecture", "Scientific ML"). The learning log doubles as evidence of continuous growth — useful for hiring managers and your own reference.
